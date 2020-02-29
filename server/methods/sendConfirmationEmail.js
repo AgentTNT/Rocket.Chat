@@ -38,6 +38,8 @@ Meteor.methods({
 			return Mailer.replace(html, { Verification_Url: url, name: user.name });
 		};
 
+		Accounts.emailTemplates.from = `${ settings.get('Site_Name') } <${ settings.get('From_Email') }>`;
+
 		try {
 			return Accounts.sendVerificationEmail(user._id, email);
 		} catch (error) {
